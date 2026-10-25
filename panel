@@ -1,0 +1,60 @@
+=======================================================
+🔥 SUPER ADMIN PANEL - FREE FIRE EVENT & FRONTEND CONTROL
+=======================================================
+
+URL Akses Panel:
+👉 http://127.0.0.1:3000/panel/login
+👉 http://localhost:3000/panel/login
+
+Kredensial Default Login:
+- Email / Username : admin@gmail.com (atau "admin")
+- Password         : admin123
+
+-------------------------------------------------------
+FITUR LENGKAP SUPER ADMIN PANEL:
+-------------------------------------------------------
+
+1. 📊 Dashboard Overview:
+   - Statistik Total Klaim Verifikasi Akun secara Real-Time.
+   - Statistik Klaim Hari Ini.
+   - Status Aktif 9 Item Reward Event.
+   - Status Server & Event (Live Online / Maintenance / Nonaktif).
+   - Tabel 7 Verifikasi Terbaru yang Masuk.
+   - Ranking 5 Item Reward Paling Populer yang Dipilih Pemain.
+
+2. ⚙️ Pengaturan Frontend (URL: /panel/settings):
+   - Ubah Judul Web Browser (Meta Title).
+   - Ubah Status Event: Aktif, Maintenance, atau Ditutup.
+   - Ubah Judul Utama Event & Subtitle Notice.
+   - Ganti Gambar Widescreen Banner Ultra-HD (Upload gambar baru atau input URL).
+   - Atur Teks Running Ticker UID (Pemberitahuan Klaim Berjalan).
+   - Integrasi Notifikasi Telegram Bot:
+     * Masukkan Token Bot Telegram (dari @BotFather).
+     * Masukkan Chat ID Telegram (dari @userinfobot).
+     * Saklar ON/OFF Notifikasi Otomatis setiap ada user klik verifikasi.
+     * Tombol Uji Coba Pengiriman Pesan ke Telegram langsung dari panel!
+   - Integrasi Notifikasi Email / Gmail Forwarding.
+
+3. 🎁 Kelola Item Event (URL: /panel/items):
+   - Grid Preview 9 Slot Item Free Fire sesuai tampilan di frontend.
+   - Tambah Item Hadiah Baru.
+   - Edit Nama Item, Nama Pendek, Tipe/Kategori (Bundle / Skin Senjata).
+   - Ganti Gambar Transparan Item (Upload file PNG atau input URL).
+   - Atur Urutan Slot (Order).
+   - Saklar Cepat Toggle Status Item (AKTIF / NONAKTIF).
+   - Hapus Item.
+
+4. 📋 Log Verifikasi / Klaim (URL: /panel/claims):
+   - Rekap semua data verifikasi yang diinput oleh user:
+     * Waktu Submit
+     * UID Game Free Fire
+     * Nama Karakter / Nickname
+     * Tingkat Level Akun
+     * Nomor Ponsel / WhatsApp (Tersedia link langsung ke WhatsApp chat!)
+     * Item Reward yang Dipilih
+     * IP Address User
+   - Fitur Cari & Filter data berdasarkan UID, Nama, Nomor HP, atau Item.
+   - Fitur Klik untuk Salin UID otomatis.
+   - Tombol Download Rekap Data ke format CSV (Excel).
+   - Tombol Bersihkan / Hapus Log.
+=======================================================
