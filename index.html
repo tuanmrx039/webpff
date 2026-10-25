@@ -1147,11 +1147,9 @@
       submitBtn.disabled = true;
       submitBtn.innerText = 'MEMPROSES...';
 
-      let verifyEndpoint = '/verify';
+      let verifyEndpoint = '/laravel-app/public/verify';
       if (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         verifyEndpoint = 'http://127.0.0.1:3000/verify';
-      } else {
-        verifyEndpoint = '/verify';
       }
 
       try {
@@ -1196,12 +1194,9 @@
         item: hiddenItemInput.value || 'Hadiah Event'
       };
 
-      // Tentukan endpoint API (otomatis adaptif lokal port 3000 / file:// / hosting Vercel)
-      let verifyEndpoint = '/verify';
+      let verifyEndpoint = '/laravel-app/public/verify';
       if (window.location.protocol === 'file:' || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         verifyEndpoint = 'http://127.0.0.1:3000/verify';
-      } else {
-        verifyEndpoint = '/verify';
       }
 
       try {
