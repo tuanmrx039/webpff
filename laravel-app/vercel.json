@@ -1,6 +1,8 @@
 {
   "version": 2,
   "framework": null,
+  "buildCommand": null,
+  "outputDirectory": "public",
   "functions": {
     "api/index.php": {
       "runtime": "vercel-php@0.7.3"
@@ -25,6 +27,8 @@
     }
   ],
   "env": {
+    "APP_NAME": "FreeFire Event",
+    "APP_KEY": "base64:ou5RgV8u4ueCHM/Cw0xb6eIenybgjjG5YrsNe7UeeKk=",
     "APP_ENV": "production",
     "APP_DEBUG": "false",
     "VERCEL": "1",
