@@ -576,7 +576,7 @@
           <span class="text-xs">🔒</span>
           <span class="text-gray-300 font-medium">Event Resmi Garena Free Fire</span>
           <span class="text-gray-600">•</span>
-          <span class="text-red-400/90 font-semibold">{{ $settings['event_title'] ?? 'Dunia Mistis' }}</span>
+          <span class="text-red-400/90 font-semibold">{{ $settings['event_title'] ?? 'Dunia Mistis 2026' }}</span>
         </div>
       </footer>
     </section>

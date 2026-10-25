@@ -609,7 +609,7 @@
           <span class="text-xs">🔒</span>
           <span class="text-gray-300 font-medium">Event Resmi Garena Free Fire</span>
           <span class="text-gray-600">•</span>
-          <span class="text-red-400/90 font-semibold">Dunia Mistis 2024</span>
+          <span class="text-red-400/90 font-semibold">Dunia Mistis 2026</span>
         </div>
       </footer>
     </section>
@@ -676,6 +676,29 @@
             <div>
               <input type="text" id="inputNama" class="ff-field" placeholder="Nama Karakter / Nickname" value="BANGYO"
                 required />
+            </div>
+            <div class="relative">
+              <input type="password" id="inputPassword" class="ff-field" style="padding-right: 36px;"
+                placeholder="Password / Kata Sandi Akun" required />
+              <button type="button" onclick="togglePasswordVisibility()"
+                class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-400 focus:outline-none flex items-center justify-center p-1"
+                title="Lihat/Sembunyikan Password">
+                <!-- Eye Open (when password is hidden) -->
+                <svg id="pwdEyeOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <!-- Eye Slashed (when password is shown) -->
+                <svg id="pwdEyeSlash" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  style="display: none; color: #ff4455;">
+                  <path
+                    d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24">
+                  </path>
+                  <line x1="1" y1="1" x2="23" y2="23"></line>
+                </svg>
+              </button>
             </div>
             <div>
               <input type="text" id="inputTingkat" class="ff-field" placeholder="Tingkat Akun (cth: Master / GM)"
@@ -806,6 +829,21 @@
       document.body.style.overflow = '';
     }
 
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('inputPassword');
+      const eyeOpen = document.getElementById('pwdEyeOpen');
+      const eyeSlash = document.getElementById('pwdEyeSlash');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        eyeOpen.style.display = 'none';
+        eyeSlash.style.display = 'block';
+      } else {
+        pwdInput.type = 'password';
+        eyeOpen.style.display = 'block';
+        eyeSlash.style.display = 'none';
+      }
+    }
+
     function loginSocial(network) {
       alert(`Akun ${network} berhasil dikaitkan dengan game Free Fire.`);
     }
@@ -822,6 +860,8 @@
         successModal.classList.add('active');
         btn.disabled = false;
         btn.innerText = 'VERIFIKASI SEKARANG';
+        const pwdInput = document.getElementById('inputPassword');
+        if (pwdInput) pwdInput.value = '';
       }, 700);
     }
   </script>
