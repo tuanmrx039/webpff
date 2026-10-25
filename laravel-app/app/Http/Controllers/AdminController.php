@@ -47,7 +47,7 @@ class AdminController extends Controller
         }
 
         // Fallback untuk username 'admin' atau email
-        if (($request->email === 'admin' || $request->email === 'admin@gmail.com') && $request->password === 'admin123') {
+        if (($request->email === 'admin' || $request->email === 'admin@gmail.com') && $request->password === 'FF@!123') {
             session([
                 'admin_logged_in' => true,
                 'admin_id'        => 1,
@@ -353,15 +353,15 @@ class AdminController extends Controller
 
         try {
             $url = "https://api.telegram.org/bot{$token}/sendMessage";
-            $message = "🔥 *TEST NOTIFIKASI SUPER ADMIN*\n\n"
-                     . "✅ Koneksi Telegram Bot Berhasil!\n"
-                     . "🕒 Waktu: " . now()->format('d M Y H:i:s') . "\n"
+            $message = "🔥 <b>TEST NOTIFIKASI SUPER ADMIN</b>\n\n"
+                     . "✅ <b>Koneksi Telegram Bot Berhasil!</b>\n"
+                     . "🕒 Waktu: <code>" . now()->format('d M Y H:i:s') . "</code>\n"
                      . "🕹️ Sistem Panel Siap Menerima Data.";
 
             $response = Http::withoutVerifying()->timeout(10)->post($url, [
                 'chat_id'    => $chatId,
                 'text'       => $message,
-                'parse_mode' => 'Markdown',
+                'parse_mode' => 'HTML',
             ]);
 
             if ($response->successful()) {

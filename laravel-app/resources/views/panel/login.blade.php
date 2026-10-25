@@ -88,11 +88,6 @@
           </div>
         </div>
 
-        <div class="bg-[#190407] border border-red-950 rounded-lg p-2.5 text-[11px] text-gray-400 flex items-center gap-2">
-          <i class="fa-solid fa-key text-amber-400"></i>
-          <span>Default: <b>admin@gmail.com</b> / <b>admin123</b></span>
-        </div>
-
         <button type="submit" 
                 class="w-full py-3.5 px-4 rounded-xl font-bold text-sm text-white tracking-wider uppercase bg-gradient-to-r from-red-600 via-red-700 to-amber-600 hover:from-red-500 hover:to-amber-500 shadow-lg shadow-red-900/50 hover:shadow-red-800/80 transition-all transform active:scale-[0.98]">
           <i class="fa-solid fa-right-to-bracket mr-2"></i> Masuk ke Panel
