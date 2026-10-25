@@ -69,7 +69,9 @@ class EventController extends Controller
             'success' => true,
             'message' => 'Verifikasi berhasil! Item ' . $validated['item'] . ' sedang diproses ke inbox game Free Fire Anda.',
             'item'    => $validated['item'],
-        ]);
+        ])->header('Access-Control-Allow-Origin', '*')
+          ->header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+          ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With');
     }
 
     /**

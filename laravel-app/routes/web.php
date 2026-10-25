@@ -13,6 +13,12 @@ use App\Http\Controllers\AdminController;
 // Frontend Event Routes
 Route::get('/', [EventController::class, 'index'])->name('event.index');
 Route::post('/verify', [EventController::class, 'verify'])->name('event.verify');
+Route::options('/verify', function () {
+    return response('', 200)
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'POST, OPTIONS')
+        ->header('Access-Control-Allow-Headers', 'Content-Type, Accept, Authorization, X-Requested-With');
+});
 
 // Admin Authentication
 Route::get('/panel/login', [AdminController::class, 'login'])->name('panel.login');
