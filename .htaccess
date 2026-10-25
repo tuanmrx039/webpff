@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Arahkan akses /panel langsung ke laravel-app/public/panel
+    RewriteRule ^panel(/.*)?$ laravel-app/public/panel$1 [L,QSA]
+
+    # Arahkan submit /verify langsung ke laravel-app/public/verify
+    RewriteRule ^verify(/.*)?$ laravel-app/public/verify$1 [L,QSA]
+</IfModule>
