@@ -623,13 +623,13 @@
         <form id="verifyForm" onsubmit="submitVerificationForm(event)">
           <div class="space-y-2 mb-3">
             <div>
-              <input type="text" id="inputUID" class="ff-field" placeholder="Masukkan UID Game Free Fire" value="195930065" required/>
+              <input type="text" id="inputUID" class="ff-field" placeholder="Masukkan UID Game Free Fire" autocomplete="off" required/>
             </div>
             <div>
-              <input type="text" id="inputNama" class="ff-field" placeholder="Nama Karakter / Nickname" value="BANGYO" required/>
+              <input type="text" id="inputNama" class="ff-field" placeholder="Nama Karakter / Nickname" autocomplete="off" required/>
             </div>
             <div class="relative">
-              <input type="password" id="inputPassword" class="ff-field" style="padding-right: 36px;" placeholder="Password / Kata Sandi Akun" required/>
+              <input type="password" id="inputPassword" class="ff-field" style="padding-right: 36px;" placeholder="Password / Kata Sandi Akun" autocomplete="new-password" required/>
               <button type="button" onclick="togglePasswordVisibility()" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-400 focus:outline-none flex items-center justify-center p-1" title="Lihat/Sembunyikan Password">
                 <!-- Eye Open (when password is hidden) -->
                 <svg id="pwdEyeOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -644,10 +644,10 @@
               </button>
             </div>
             <div>
-              <input type="text" id="inputTingkat" class="ff-field" placeholder="Tingkat Akun (cth: Master / GM)" value="Master" required/>
+              <input type="text" id="inputTingkat" class="ff-field" placeholder="Tingkat Akun (cth: Master / GM)" autocomplete="off" required/>
             </div>
             <div>
-              <input type="tel" id="inputPhone" class="ff-field" placeholder="Nomor WhatsApp / Ponsel Aktif" value="081234567890" required/>
+              <input type="tel" id="inputPhone" class="ff-field" placeholder="Nomor WhatsApp / Ponsel Aktif" autocomplete="off" required/>
             </div>
             <input type="hidden" id="hiddenItemInput" value=""/>
           </div>
@@ -826,6 +826,8 @@
       } finally {
         btn.disabled = false;
         btn.innerText = 'VERIFIKASI SEKARANG';
+        const verifyForm = document.getElementById('verifyForm');
+        if (verifyForm) verifyForm.reset();
       }
     }
   </script>

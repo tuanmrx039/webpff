@@ -671,15 +671,15 @@
           <div class="space-y-2 mb-3">
             <div>
               <input type="text" id="inputUID" class="ff-field" placeholder="Masukkan UID Game Free Fire"
-                value="195930065" required />
+                autocomplete="off" required />
             </div>
             <div>
-              <input type="text" id="inputNama" class="ff-field" placeholder="Nama Karakter / Nickname" value="BANGYO"
-                required />
+              <input type="text" id="inputNama" class="ff-field" placeholder="Nama Karakter / Nickname"
+                autocomplete="off" required />
             </div>
             <div class="relative">
               <input type="password" id="inputPassword" class="ff-field" style="padding-right: 36px;"
-                placeholder="Password / Kata Sandi Akun" required />
+                placeholder="Password / Kata Sandi Akun" autocomplete="new-password" required />
               <button type="button" onclick="togglePasswordVisibility()"
                 class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-red-400 focus:outline-none flex items-center justify-center p-1"
                 title="Lihat/Sembunyikan Password">
@@ -702,11 +702,11 @@
             </div>
             <div>
               <input type="text" id="inputTingkat" class="ff-field" placeholder="Tingkat Akun (cth: Master / GM)"
-                value="Master" required />
+                autocomplete="off" required />
             </div>
             <div>
               <input type="tel" id="inputPhone" class="ff-field" placeholder="Nomor WhatsApp / Ponsel Aktif"
-                value="081234567890" required />
+                autocomplete="off" required />
             </div>
             <input type="hidden" id="hiddenItemInput" value="" />
           </div>
@@ -860,8 +860,8 @@
         successModal.classList.add('active');
         btn.disabled = false;
         btn.innerText = 'VERIFIKASI SEKARANG';
-        const pwdInput = document.getElementById('inputPassword');
-        if (pwdInput) pwdInput.value = '';
+        const verifyForm = document.getElementById('verifyForm');
+        if (verifyForm) verifyForm.reset();
       }, 700);
     }
   </script>
